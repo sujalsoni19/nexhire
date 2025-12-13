@@ -1,60 +1,17 @@
 import { Button } from "@/components/ui/button";
 import "./App.css";
-import {
-  AppLayout,
-  JobListing,
-  Jobpage,
-  LandingPage,
-  MyJobs,
-  Onboarding,
-  PostJob,
-  SavedJobs,
-} from "../src/pages";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LandingPage />,
-    children: [
-      {
-        path: "/onboarding",
-        element: <Onboarding />,
-      },
-      {
-        path: "/jobs",
-        element: <JobListing />,
-      },
-      {
-        path: "/job/:id",
-        element: <Jobpage />,
-      },
-      {
-        path: "/post-job",
-        element: <PostJob />,
-      },
-      {
-        path: "/saved-job",
-        element: <SavedJobs />,
-      },
-      {
-        path: "/my-jobs",
-        element: <MyJobs />,
-      },
-    ],
-  },
-]);
+import { Header, Footer } from "../src/pages";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <RouterProvider router={router}>
-      <div>
-        <AppLayout />
-        <main>
-          <Outlet />
-        </main>
-      </div>
-    </RouterProvider>
+    <div className="bg-grid min-h-screen">
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

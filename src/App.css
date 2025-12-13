@@ -8,6 +8,25 @@
   }
 }
 
+/* Subtle grid background – shadcn compatible */
+.bg-grid {
+  background-color: var(--background);
+  background-image:
+    linear-gradient(
+      to right,
+      oklch(from var(--foreground) l c h / 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(from var(--foreground) l c h / 0.06) 1px,
+      transparent 1px
+    );
+  background-size: 55px 55px;
+}
+
+
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
