@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import Logo from './Logo'
 import { Button } from '@/components/ui/button'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 function Header() {
   return (
@@ -15,8 +16,14 @@ function Header() {
       </div>
       <div className='flex gap-1 sm:gap-8'>
         <ModeToggle />
-        <Button>Login</Button>
+        <Button variant='outline'>Login</Button>
       </div>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
     </div>
   )
 }
