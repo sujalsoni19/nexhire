@@ -15,6 +15,7 @@ import App from "./App.jsx";
 import { ThemeProvider } from "./components/themeprovider";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { shadcn } from "@clerk/themes";
+import ProtectedRoute from "./components/protected_route.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 console.log(PUBLISHABLE_KEY);
@@ -34,32 +35,55 @@ const router = createBrowserRouter([
       },
       {
         path: "/onboarding",
-        element: <Onboarding />,
+        element: (
+          <ProtectedRoute>
+            <Onboarding />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/jobs",
-        element: <JobListing />,
+        element: (
+          <ProtectedRoute>
+            <JobListing />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/job/:id",
-        element: <Jobpage />,
+        element: (
+          <ProtectedRoute>
+            <Jobpage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/post-job",
-        element: <PostJob />,
+        element: (
+          <ProtectedRoute>
+            <PostJob />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/saved-job",
-        element: <SavedJobs />,
+        path: "/saved-jobs",
+        element: (
+          <ProtectedRoute>
+            <SavedJobs />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/my-jobs",
-        element: <MyJobs />,
+        element: (
+          <ProtectedRoute>
+            <MyJobs />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
 ]);
-
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
