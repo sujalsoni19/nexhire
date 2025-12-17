@@ -28,13 +28,13 @@ function Onboarding() {
   },[user])
 
 
-  if (!isLoaded) {
-    return (
-      <div className="w-full flex justify-center items-center ">
-        <DotLoader color="blue" width="100%" />
-      </div>
-    );
-  }
+  if (isLoaded) {
+      return (
+        <div className="flex-1 flex justify-center items-center">
+          <DotLoader color="blue" />
+        </div>
+      );
+    }
 
   return (
     <div>
