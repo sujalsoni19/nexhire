@@ -1,8 +1,9 @@
 import { useUser } from "@clerk/clerk-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useFetch from "@/hooks/useFetch";
+import { savedJob } from "@/api/apiJobs";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -19,7 +20,31 @@ function Jobcard({
   savedInit = false,
   onJobSaved = () => {},
 }) {
+
+    const [saved, setSaved] = useState(savedInit);
+
+    const {
+    fn: fnsavedJob,
+    data: SavedJobs,
+    loading: loadingsavedJob,
+    error,
+  } = useFetch( savedJob ,{
+    alreadySaved: saved,
+  });
+
   const { user } = useUser();
+
+  const handleSaveJob = async () => {
+    await fnsavedJob({
+        user_id: user.id,
+        job_id: job.id
+    });
+    onJobSaved();
+  }
+
+  useEffect(()=>{
+    if(savedJob!==undefined) setSaved(savedJob?.length > 0)
+  },[savedJob])
 
   return (
     <Card className="flex">
@@ -57,8 +82,25 @@ function Jobcard({
             More details
           </Button>
         </Link>
+        {!isMyJob && (
+            <Button
+            variant="outline"
+            className="w-15"
+            onClick={handleSaveJob}
+            disabled={loadingsavedJob}
+            >
+                {
+                    saved ? (
+                        <HeartIcon fill="red" stroke="red" />
+                    ) : (
+                        <HeartIcon />
+                    )
+                }
 
-        <HeartIcon fill="red" />
+            </Button>
+        )}
+
+        
       </CardFooter>
     </Card>
   );

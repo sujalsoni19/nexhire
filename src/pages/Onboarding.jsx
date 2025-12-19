@@ -28,7 +28,7 @@ function Onboarding() {
   },[user])
 
 
-  if (isLoaded) {
+  if (!isLoaded) {
       return (
         <div className="flex-1 flex justify-center items-center">
           <DotLoader color="blue" />

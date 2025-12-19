@@ -53,7 +53,9 @@ function JobListing() {
         <div className="mt-12 px-4 grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {Jobs?.length ? (
             Jobs?.map((job) => {
-              return <Jobcard key={job.id} job={job} />;
+              return <Jobcard key={job.id}
+               job={job}
+               savedInit={job?.saved?.length > 0} />;
             })
           ) : (
             <div>No Jobs Found</div>
