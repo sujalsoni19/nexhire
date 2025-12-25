@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import useFetch from "@/hooks/useFetch";
-import { savedJob } from "@/api/apiJobs";
+import { saveJob } from "@/api/apiJobs";
 import {
   Card,
   CardContent,
@@ -25,10 +25,10 @@ function Jobcard({
 
     const {
     fn: fnsavedJob,
-    data: SavedJobs,
+    data: savedJob,
     loading: loadingsavedJob,
     error,
-  } = useFetch( savedJob ,{
+  } = useFetch( saveJob ,{
     alreadySaved: saved,
   });
 

@@ -37,7 +37,7 @@ function Onboarding() {
     }
 
   return (
-    <div>
+    <div className="w-full">
       <div className="gap-16 mt-24 px-4 py-8 flex flex-col sm:gap-24 justify-center items-center">
         <h1
           className="text-3xl sm:text-5xl
