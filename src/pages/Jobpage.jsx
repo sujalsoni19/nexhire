@@ -15,6 +15,7 @@ import {
 import { Briefcase, DoorClosedIcon, DoorOpenIcon, MapPin } from "lucide-react";
 import MDEditor from "@uiw/react-md-editor";
 import Applyjobdrawer from "@/components/Applyjobdrawer";
+import ApplicationCard from "@/components/ApplicationCard";
 
 function Jobpage() {
   const { isLoaded, user } = useUser();
@@ -148,6 +149,16 @@ function Jobpage() {
         </div>
         )
       }
+
+      {job?.applications?.length > 0 && job?.recruiter_id === user?.id && (
+        <div className="mt-5 flex flex-col gap-3 px-4 sm:px-10 py-2">
+          <h2 className="font-extrabold sm:text-4xl text-2xl mb-3">Applications</h2>
+          {job?.applications.map((application) => {
+            return <ApplicationCard
+            key={application.id} application={application} />
+          })}
+        </div>
+      )}
     </div>
   );
 }
