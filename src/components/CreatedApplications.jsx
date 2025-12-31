@@ -30,7 +30,8 @@ function CreatedApplications() {
 
   return (
     <div className="mt-4 flex flex-col gap-3 px-4 sm:px-10 py-2">
-      {datagetApplications?.map((application) => {
+      {datagetApplications?.length ? (
+        datagetApplications?.map((application) => {
         return (
           <ApplicationCard
             key={application.id}
@@ -38,7 +39,12 @@ function CreatedApplications() {
             isCandidate
           />
         );
-      })}
+      })
+      ) : (
+        <div className="col-span-full flex justify-center items-center text-2xl">
+              <h1>No Applications Found</h1>
+            </div>
+      ) }
     </div>
   );
 }

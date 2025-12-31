@@ -5,7 +5,6 @@ import Logo from "../components/Logo.jsx";
 import { Button } from "@/components/ui/button";
 import {
   PenBoxIcon,
-  MenuIcon,
   BriefcaseBusinessIcon,
   Heart,
 } from "lucide-react";
@@ -16,17 +15,10 @@ import {
   SignIn,
   useUser,
 } from "@clerk/clerk-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 function Header() {
   const { user } = useUser();
-
   const [showSignIn, setshowSignIn] = useState(false);
-
   const [search, setSearch] = useSearchParams();
 
   useEffect(() => {
@@ -49,56 +41,47 @@ function Header() {
           <Logo />
         </Link>
 
-        <div className="flex gap-1 sm:gap-8 items-center">
+        <div className="flex gap-2 sm:gap-8 items-center">
           <ModeToggle />
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="sm:hidden">
-                <MenuIcon />
+          <div className="sm:hidden">
+            <SignedOut>
+              <Button variant="outline" onClick={() => setshowSignIn(true)}>
+                Login
               </Button>
-            </DropdownMenuTrigger>
+            </SignedOut>
 
-            <DropdownMenuContent align="end" className="w-48 sm:hidden">
-              <SignedOut>
-                <Button
-                  variant="outline"
-                  className="w-full mb-2"
-                  onClick={() => setshowSignIn(true)}
-                >
-                  Login
-                </Button>
-              </SignedOut>
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "w-10 h-10",
+                  },
+                }}
+              >
+                <UserButton.MenuItems>
+                  <UserButton.Link
+                    label="My Jobs"
+                    labelIcon={<BriefcaseBusinessIcon size={15} />}
+                    href="/my-jobs"
+                  />
+                  <UserButton.Link
+                    label="Saved Jobs"
+                    labelIcon={<Heart size={15} />}
+                    href="/saved-jobs"
+                  />
 
-              <SignedIn>
-                <div className="flex mb-1 justify-center">
-                  <UserButton>
-                    <UserButton.MenuItems>
-                      <UserButton.Link
-                        label="My Jobs"
-                        labelIcon={<BriefcaseBusinessIcon size={15} />}
-                        href="/my-jobs"
-                      />
-                      <UserButton.Link
-                        label="Saved Jobs"
-                        labelIcon={<Heart size={15} />}
-                        href="/saved-jobs"
-                      />
-                    </UserButton.MenuItems>
-                  </UserButton>
-                </div>
-
-                {user?.unsafeMetadata?.role === "recruiter" && (
-                  <Link to="/post-job">
-                    <Button variant="blue" className="w-full">
-                      <PenBoxIcon className="mr-2 h-4 w-4" />
-                      Post a Job
-                    </Button>
-                  </Link>
-                )}
-              </SignedIn>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                  {user?.unsafeMetadata?.role === "recruiter" && (
+                    <UserButton.Link
+                      label="Post a Job"
+                      labelIcon={<PenBoxIcon size={15} />}
+                      href="/post-job"
+                    />
+                  )}
+                </UserButton.MenuItems>
+              </UserButton>
+            </SignedIn>
+          </div>
 
           <div className="hidden sm:flex gap-4 items-center">
             <SignedOut>
@@ -128,21 +111,23 @@ function Header() {
                   />
                 </UserButton.MenuItems>
               </UserButton>
+
               {user?.unsafeMetadata?.role === "recruiter" && (
-                  <Link to="/post-job">
-                    <Button variant="blue" className="w-full">
-                      <PenBoxIcon className="mr-2 h-4 w-4" />
-                      Post a Job
-                    </Button>
-                  </Link>
-                )}
+                <Link to="/post-job">
+                  <Button variant="blue">
+                    <PenBoxIcon className="mr-2 h-4 w-4" />
+                    Post a Job
+                  </Button>
+                </Link>
+              )}
             </SignedIn>
           </div>
         </div>
       </div>
+
       {showSignIn && (
         <div
-          className="fixed inset-0 z-50 flex justify-center items-center bg-black/50 "
+          className="fixed inset-0 z-50 flex justify-center items-center bg-black/50"
           onClick={handleOverlayClick}
         >
           <SignIn
