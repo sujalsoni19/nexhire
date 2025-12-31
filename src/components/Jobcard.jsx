@@ -1,7 +1,8 @@
 import { useUser } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import useFetch from "@/hooks/useFetch";
-import { saveJob } from "@/api/apiJobs";
+import { BarLoader } from "react-spinners";
+import { deleteJob, saveJob } from "@/api/apiJobs";
 import {
   Card,
   CardContent,
@@ -21,6 +22,7 @@ function Jobcard({
   onJobSaved = () => {},
 }) {
   const [saved, setSaved] = useState(savedInit);
+  const { user } = useUser();
 
   const {
     fn: fnsavedJob,
@@ -31,7 +33,7 @@ function Jobcard({
     alreadySaved: saved,
   });
 
-  const { user } = useUser();
+  
 
   const handleSaveJob = async () => {
     await fnsavedJob({
@@ -41,12 +43,31 @@ function Jobcard({
     onJobSaved();
   };
 
+  const {
+    fn: fndeleteJob,
+    data: datadeleteJob,
+    loading: loadingdeleteJob,
+    errordeleteJob,
+  } = useFetch(deleteJob, {
+    job_id:job.id
+  });
+
+  const handleDeleteJob = async () => {
+    await fndeleteJob();
+    onJobSaved();
+  };
+
   useEffect(() => {
     if (savedJob !== undefined) setSaved(savedJob?.length > 0);
   }, [savedJob]);
 
   return (
     <Card className="flex">
+      {loadingdeleteJob && (
+          <div className="w-full">
+            <BarLoader color="blue" width="100%" />
+          </div>
+        )}
       <CardHeader>
         <CardTitle className="text-xl items-center flex justify-between md:text-2xl">
           {job.title}
@@ -54,6 +75,7 @@ function Jobcard({
             <Trash2Icon
               fill="red"
               size={20}
+              onClick={handleDeleteJob}
               className="text-red-300 cursor-pointer"
             />
           )}

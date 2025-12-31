@@ -39,7 +39,7 @@ function CreatedJobs() {
                 <Jobcard
                   key={job.id}
                   job={job}
-                  savedInit={job?.saved?.length > 0}
+                  onJobSaved={fngetMyJobs}
                   isMyJob
                 />
               );
