@@ -1,16 +1,49 @@
-# React + Vite
+# NexHire  
+A Full-Stack Job Portal for Job Seekers & Recruiters
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NexHire is a modern, full-stack hiring platform that enables job seekers to discover and apply for jobs while allowing recruiters to post jobs, manage applicants, and track hiring progress — all in one place.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧩 Tech Stack
 
-## React Compiler
+- **Frontend:** React, Tailwind CSS, Shadcn UI  
+- **Backend & Database:** Supabase  
+- **Authentication:** Clerk  
+- **Forms & Validation:** React Hook Form, Zod  
+- **Deployment:** Production-ready build
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔐 Authentication & Authorization
+- Secure authentication using Clerk
+- Protected routes for authenticated users
+- Role-based onboarding (Job Seeker / Recruiter)
+
+### 👤 User Onboarding
+- Guided onboarding flow after signup
+- Profile setup for users and recruiters
+
+### 💼 Job Management
+- Browse and search jobs
+- Filter jobs by criteria
+- Save / unsave jobs
+- Apply to jobs
+- Track application status
+
+### 🏢 Recruiter Features
+- Post new jobs
+- Create and manage companies
+- View applicants for posted jobs
+- Track applications
+- Delete jobs
+
+### 📄 Pages Included
+- Landing Page
+- Job Listing Page
+- Job Detail Page
+- Saved Jobs Page
+- My Applications Page
+- My Created Jobs Page
